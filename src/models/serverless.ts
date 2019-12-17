@@ -8,7 +8,7 @@ export interface ArmTemplateConfig {
 }
 
 export interface ResourceConfig {
-  name: string;
+  name?: string;
   sku?: {
     name?: string;
     tier?: string;
@@ -40,13 +40,16 @@ export interface ServerlessAzureProvider {
   environment?: {
     [key: string]: any;
   };
+  tags?: {
+    [tagName: string]: string;
+  };
   deployment?: DeploymentConfig;
   deploymentName?: string;
   resourceGroup?: string;
   apim?: ApiManagementConfig;
   functionApp?: FunctionAppConfig;
   appInsights?: ResourceConfig;
-  appServicePlan?: ResourceConfig;
+  appServicePlan?: AppServicePlanConfig;
   storageAccount?: ResourceConfig;
   hostingEnvironment?: ResourceConfig;
   virtualNetwork?: ResourceConfig;
@@ -79,6 +82,15 @@ export interface AzureKeyVaultConfig {
   name: string;
   /** The name of the azure resource group with the key vault */
   resourceGroup: string;
+}
+
+export interface AppServicePlanConfig extends ResourceConfig {
+  scale?: {
+    minWorkerCount?: number;
+    maxWorkerCount?: number;
+    workerSizeId?: string;
+  };
+  hostingEnvironment?: string;
 }
 
 /**
@@ -141,7 +153,7 @@ export interface ServerlessAzureConfig {
   provider: ServerlessAzureProvider;
   plugins: string[];
   functions: any;
-  package: {
+  package?: {
     individually: boolean;
     artifactDirectoryName: string;
     artifact: string;

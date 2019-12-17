@@ -3,6 +3,7 @@ import Serverless from "serverless";
 import { ServerlessAzureFunctionConfig, ServerlessAzureConfig } from "../models/serverless";
 import { BindingUtils } from "./bindings";
 import { constants } from "./constants";
+import { createInterface } from "readline"
 
 export interface FunctionMetadata {
   entryPoint: any;
@@ -11,7 +12,7 @@ export interface FunctionMetadata {
 }
 
 export class Utils {
-  public static getFunctionMetaData(functionName: string, serverless: Serverless): FunctionMetadata {
+  public static async getFunctionMetaData(functionName: string, serverless: Serverless): Promise<FunctionMetadata> {
     const config: ServerlessAzureConfig = serverless.service as any;
     const bindings = [];
     let bindingSettingsNames = [];
@@ -26,7 +27,7 @@ export class Utils {
       functionJson: null
     };
 
-    const parsedBindings = BindingUtils.getBindingsMetaData(serverless);
+    const parsedBindings = await BindingUtils.getBindingsMetaData(serverless);
 
     const bindingTypes = parsedBindings.bindingTypes;
     const bindingDisplayNames = parsedBindings.bindingDisplayNames;
@@ -186,6 +187,23 @@ export class Utils {
   public static wait(time: number = 1000) {
     return new Promise((resolve) => {
       setTimeout(resolve, time);
+    });
+  }
+
+  /**
+   * Wait for user input and return it
+   */
+  public static async waitForUserInput(): Promise<string> {
+    const rl = createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    return new Promise((resolve) => {
+      rl.question("", (answer: string) => {
+        rl.close();
+        resolve(answer);
+      });
     });
   }
 }
