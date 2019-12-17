@@ -65,7 +65,7 @@ export class BindingUtils {
 
     binding[constants.type] = "http";
     binding[constants.direction] = constants.outDirection;
-    binding[constants.name] = "res";
+    binding[constants.name] = "$return";
 
     return binding;
   }
