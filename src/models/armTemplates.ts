@@ -54,11 +54,7 @@ export interface ArmParameter {
   defaultValue?: string | number;
 }
 
-<<<<<<< HEAD
-export interface DefaultArmParams {
-=======
 export interface DefaultArmParams extends ArmParameters {
->>>>>>> 1.0.2-kevboutin
   location?: ArmParameter;
 }
 

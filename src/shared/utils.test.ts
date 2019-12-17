@@ -37,11 +37,7 @@ describe("utils", () => {
     expect(metadata).toEqual(expectedMetadata);
   });
 
-<<<<<<< HEAD
-  it("resolves handler when code is in function folder", () => {
-=======
   it("resolves handler when code is in function folder", async () => {
->>>>>>> 1.0.2-kevboutin
     const handler = "hello/index.handler";
     const slsFunctions = sls.service["functions"];
     MockFactory.updateService(sls, {
@@ -64,11 +60,7 @@ describe("utils", () => {
     expect(metadata).toEqual(expectedMetadata);
   });
 
-<<<<<<< HEAD
-  it("resolves handler when code is at the project root", () => {
-=======
   it("resolves handler when code is at the project root", async () => {
->>>>>>> 1.0.2-kevboutin
     const handler = "hello.handler";
     const slsFunctions = sls.service["functions"];
     MockFactory.updateService(sls, {
