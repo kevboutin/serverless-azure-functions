@@ -34,6 +34,10 @@ export interface ServerlessAzureProvider {
   region: string;
   stage: string;
   name: string;
+  // Dematic Custom:
+  customer: string;
+  appName: string;
+  // End Dematic Custom
   subscriptionId?: string;
   tenantId?: string;
   appId?: string;

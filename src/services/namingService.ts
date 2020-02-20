@@ -18,9 +18,10 @@ export class AzureNamingService {
    *
    * {prefix}-{shortRegionName}-{shortStageName}(optionally: -{suffix})
    *
-   * @param config Serverless Azure Config for service (serverless.service)
-   * @param resourceConfig The serverless resource configuration
-   * @param suffix Optional suffix to append on the end of the generated name
+   * Dematic version:
+   * {prefix}-{shortRegionName}-{customer}{appName}-(optionally: -{suffix})
+   *
+   * @param options The AzureNamingServiceOptions object containing options
    */
   public static getResourceName(options: AzureNamingServiceOptions) {
     if (options.resourceConfig && options.resourceConfig.name) {
@@ -31,14 +32,15 @@ export class AzureNamingService {
       options.includeHash = true;
     }
 
-    const { prefix, region, stage } = options.config.provider
+    const { prefix, region, stage, appName, customer } = options.config.provider;
     let name = [
       prefix,
       this.createShortAzureRegionName(region),
-      this.createShortStageName(stage),
+      customer + appName,
+      this.createShortStageName(stage)
     ].join("-");
 
-    if(options.includeHash) {
+    if (options.includeHash) {
       name += `-${md5(options.config.provider.resourceGroup).substr(0, configConstants.resourceGroupHashLength)}`
     }
 

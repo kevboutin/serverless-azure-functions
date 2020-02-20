@@ -14,7 +14,8 @@ export class StorageAccountResource implements ArmResourceTemplateGenerator {
     const options: AzureNamingServiceOptions = {
       config,
       resourceConfig: config.provider.storageAccount,
-      suffix: ""
+      suffix: "sa",
+      includeHash: false
     };
     return AzureNamingService.getSafeResourceName({
       ...options,

@@ -16,8 +16,9 @@ export class ApimResource implements ArmResourceTemplateGenerator {
     const options: AzureNamingServiceOptions = {
       config,
       resourceConfig: config.provider.apim,
-      suffix: "apim",
-    }
+      suffix: "api",
+      includeHash: false
+    };
     return AzureNamingService.getResourceName(options);
   }
 

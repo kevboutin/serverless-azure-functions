@@ -18,9 +18,9 @@ export class FunctionAppResource implements ArmResourceTemplateGenerator {
     const options: AzureNamingServiceOptions = {
       config,
       resourceConfig: config.provider.functionApp,
-      suffix: safeServiceName,
-      includeHash: false,
-    }
+      suffix: "fa",
+      includeHash: false
+    };
 
     return AzureNamingService.getResourceName(options);
   }

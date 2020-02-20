@@ -18,7 +18,8 @@ export class AppServicePlanResource implements ArmResourceTemplateGenerator {
       config,
       resourceConfig: config.provider.appServicePlan,
       suffix: "asp",
-    }
+      includeHash: false
+    };
     return AzureNamingService.getResourceName(options);
   }
 

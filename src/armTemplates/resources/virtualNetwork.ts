@@ -9,7 +9,8 @@ export class VirtualNetworkResource implements ArmResourceTemplateGenerator {
       config,
       resourceConfig: config.provider.hostingEnvironment,
       suffix: "vnet",
-    }
+      includeHash: false
+    };
     return AzureNamingService.getResourceName(options);
   }
 

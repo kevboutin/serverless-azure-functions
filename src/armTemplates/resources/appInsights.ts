@@ -11,8 +11,9 @@ export class AppInsightsResource implements ArmResourceTemplateGenerator {
     const options: AzureNamingServiceOptions = {
       config,
       resourceConfig: config.provider.appInsights,
-      suffix: "appinsights",
-    }
+      suffix: "ai",
+      includeHash: false
+    };
     return AzureNamingService.getResourceName(options);
   }
 
@@ -27,7 +28,7 @@ export class AppInsightsResource implements ArmResourceTemplateGenerator {
         type: ArmParamType.String
       }
     }
-    
+
     return {
       "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
       "contentVersion": "1.0.0.0",
