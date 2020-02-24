@@ -141,7 +141,7 @@ export class ArmService extends BaseService {
   }
 
   private areDeploymentsEqual(current: ArmDeployment, previous: ArmDeployment): boolean {
-    if (!current || !previous) {
+    if (!current || !previous || !previous.parameters || !current.parameters) {
       return false;
     }
     const mergedDefaultParameters = this.mergeDefaultParams(current.parameters, current.template.parameters);
