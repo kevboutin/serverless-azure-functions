@@ -6,6 +6,8 @@ describe("Function App Resource", () => {
   const prefix = "prefix";
   const region = "westus";
   const stage = "prod";
+  const customer = "mul05";
+  const appName = "auth01";
 
   it("generates the correct resource name", () => {
     const config: ServerlessAzureConfig = {
@@ -14,6 +16,8 @@ describe("Function App Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x"
       },
@@ -21,7 +25,7 @@ describe("Function App Resource", () => {
     } as any;
 
     expect(FunctionAppResource.getResourceName(config)).toEqual(
-      `${config.provider.prefix}-wus-${config.provider.stage}`
+      `${config.provider.prefix}-wus-${customer}${appName}-${stage}-fa`
     );
   });
 
@@ -37,6 +41,8 @@ describe("Function App Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x",
         functionApp: {

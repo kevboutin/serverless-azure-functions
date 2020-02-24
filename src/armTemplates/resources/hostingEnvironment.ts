@@ -13,7 +13,7 @@ export class HostingEnvironmentResource implements ArmResourceTemplateGenerator 
       config,
       resourceConfig: config.provider.hostingEnvironment,
       suffix: "ase",
-    }
+    };
     return AzureNamingService.getResourceName(options);
   }
 

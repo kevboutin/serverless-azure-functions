@@ -5,7 +5,7 @@ import md5 from "md5";
 
 describe("Storage Account Resource", () => {
   const resourceGroup = "myResourceGroup";
-  const resourceGroupHash = md5(resourceGroup).substr(0, 6);
+  //const resourceGroupHash = md5(resourceGroup).substr(0, 6);
 
   const config: ServerlessAzureConfig = {
     functions: [],
@@ -17,8 +17,9 @@ describe("Storage Account Resource", () => {
       name: "azure",
       region: "westus",
       stage: "dev",
-      resourceGroup,
-      runtime: "nodejs10.x"
+      customer: "mul05",
+      appName: "auth01",
+      resourceGroup
     },
     service: "test-api"
   } as any;
@@ -35,7 +36,7 @@ describe("Storage Account Resource", () => {
 
     const result = StorageAccountResource.getResourceName(testConfig);
     assertValidStorageAccountName(testConfig, result);
-    expect(result).toEqual(`slswusdev${resourceGroupHash}`);
+    expect(result).toEqual(`wusmul05auth01devsa`);
   });
 
   it("Generates safe storage account names with long parts", () => {
@@ -52,7 +53,7 @@ describe("Storage Account Resource", () => {
 
     const result = StorageAccountResource.getResourceName(testConfig);
     assertValidStorageAccountName(testConfig, result);
-    expect(result).toEqual(`mylaussedev${resourceGroupHash}`)
+    expect(result).toEqual(`mylaussemul05auth01devsa`)
   });
 
   it("Generating a storage account name is idempotent", () => {

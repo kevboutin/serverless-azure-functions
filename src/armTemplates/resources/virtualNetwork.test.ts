@@ -8,12 +8,14 @@ describe("Virtual Network Resource", () => {
   const prefix = "prefix";
   const region = "eastus2";
   const stage = "prod";
+  const customer = "mul05";
+  const appName = "auth01";
 
   it("generates the correct resource name", () => {
-    const resourceGroupHash = md5(resourceGroupName).substr(
-      0,
-      configConstants.resourceGroupHashLength
-    );
+    //const resourceGroupHash = md5(resourceGroupName).substr(
+    //  0,
+    //  configConstants.resourceGroupHashLength
+    //);
 
     const config: ServerlessAzureConfig = {
       provider: {
@@ -21,6 +23,8 @@ describe("Virtual Network Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x"
       },
@@ -28,7 +32,7 @@ describe("Virtual Network Resource", () => {
     } as any;
 
     expect(VirtualNetworkResource.getResourceName(config)).toEqual(
-      `${prefix}-eus2-${stage}-${resourceGroupHash}-vnet`
+      `${prefix}-eus2-${customer}${appName}-${stage}-vnet`
     );
   });
 
@@ -44,6 +48,8 @@ describe("Virtual Network Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x"
       },

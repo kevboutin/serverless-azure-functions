@@ -8,12 +8,14 @@ describe("App Insights Resource", () => {
   const prefix = "prefix";
   const region = "eastus2";
   const stage = "prod";
+  const customer = "mul05";
+  const appName = "auth01";
 
   it("generates the correct resource name", () => {
-    const resourceGroupHash = md5(resourceGroupName).substr(
-      0,
-      configConstants.resourceGroupHashLength
-    );
+    //const resourceGroupHash = md5(resourceGroupName).substr(
+    //  0,
+    //  configConstants.resourceGroupHashLength
+    //);
 
     const config: ServerlessAzureConfig = {
       provider: {
@@ -21,6 +23,8 @@ describe("App Insights Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x"
       },
@@ -28,7 +32,7 @@ describe("App Insights Resource", () => {
     } as any;
 
     expect(AppInsightsResource.getResourceName(config)).toEqual(
-      `${prefix}-eus2-${stage}-${resourceGroupHash}-appinsights`
+      `${prefix}-eus2-${customer}${appName}-${stage}-ai`
     );
   });
 
@@ -41,6 +45,8 @@ describe("App Insights Resource", () => {
         prefix,
         region,
         stage,
+        customer,
+        appName,
         resourceGroup: resourceGroupName,
         runtime: "nodejs10.x",
         appInsights: {
